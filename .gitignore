@@ -1,0 +1,79 @@
+# -------------------------
+#  Python cache / artifacts
+# -------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.so
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+
+# C extensions
+*.so
+
+# -------------------------
+#  Virtual environments
+# -------------------------
+venv/
+.env/
+.venv/
+
+# -------------------------
+#  Build / packaging
+# -------------------------
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# -------------------------
+#  Pytest / coverage
+# -------------------------
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.cache/
+
+# -------------------------
+#  Jupyter / notebooks
+# -------------------------
+.ipynb_checkpoints/
+
+# -------------------------
+#  VS Code / IDEs
+# -------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# -------------------------
+#  Environment / secrets
+# -------------------------
+.env
+*.env
+.env.*
+*.ini
+*.cfg
+
+# -------------------------
+#  Project-specific
+# -------------------------
+# Ignore simulation output files if you ever export them
+output/
+logs/
+data/
+
+# If you generate plots or images later
+*.png
+*.svg
+*.pdf
