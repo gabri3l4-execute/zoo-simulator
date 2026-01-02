@@ -1,5 +1,5 @@
 import random
-from .base import Animal
+from zoo_simulator.animals.base import Animal
 
 class Omnivore(Animal):
     def __init__(self, species, name, energy=100):

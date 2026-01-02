@@ -1,5 +1,5 @@
 import random
-from ecosystem.generator import generate_ecosystem
+from zoo_simulator.ecosystem.generator import generate_ecosystem
 
 def run_simulation(days=100, total_animals=20):
     animals = generate_ecosystem(total=total_animals)

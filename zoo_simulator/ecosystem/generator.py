@@ -1,5 +1,5 @@
 import random
-from .factory import create_animal
+from zoo_simulator.ecosystem.factory import create_animal
 
 def generate_ecosystem(total=20):
     ratios = {"herbivore": 0.6, "omnivore": 0.25, "carnivore": 0.15}

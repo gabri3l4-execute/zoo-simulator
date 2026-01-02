@@ -1,6 +1,4 @@
-from animals.herbivore import Herbivore
-from animals.carnivore import Carnivore
-from animals.omnivore import Omnivore
+from zoo_simulator.animals import Herbivore, Carnivore, Omnivore
 
 def create_animal(species: str, name: str, energy_level: int):
     animal_types = {
