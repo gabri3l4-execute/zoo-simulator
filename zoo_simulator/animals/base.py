@@ -32,6 +32,12 @@ class Animal:
         """Perform this animal's daily action. Override in subclasses."""
         pass
 
+    def _iter_available_prey(self, ecosystem):
+        """Yield animals that can be hunted by this predator."""
+        for animal in ecosystem:
+            if animal.is_alive() and animal.can_be_hunted_by(self) and animal != self:
+                yield animal
+
     def _hunt(self, prey, success_chance, reward, fail_cost):
         """Shared hunting helper to reduce duplication in subclasses."""
         if not self.is_alive() or not prey.is_alive():
@@ -44,6 +50,13 @@ class Animal:
             self.eat(reward)
         else:
             self.decay(fail_cost)
+
+    def _calculate_hunt_probability(self, ecosystem, multiplier=1.0):
+        """Calculate hunt probability based on population ratio and multiplier."""
+        alive_animals = [a for a in ecosystem if a.is_alive()]
+        current_pop = len(alive_animals)
+        total_animals = len(ecosystem)
+        return multiplier * (current_pop / total_animals)
 
     def decay(self, amount):
         """Decrease energy by amount. Property handles clamping and death."""
@@ -60,4 +73,4 @@ class Animal:
             self.energy += amount
 
     def is_alive(self):
-        return self.alive and self.energy > 0
+        return self.alive and self.energy > self.MIN_ENERGY

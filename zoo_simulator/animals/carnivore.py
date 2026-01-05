@@ -16,11 +16,10 @@ class Carnivore(Animal):
 
     def day_action(self, ecosystem):
         """Carnivores hunt each day."""
-        alive_animals = [a for a in ecosystem if a.is_alive()]
-        prey_list = [p for p in alive_animals if p.can_be_hunted_by(self) and p != self]
+        prey_list = list(self._iter_available_prey(ecosystem))
         if prey_list:
-            current_pop = len(alive_animals)
-            total_animals = len(ecosystem)
-            hunt_prob = min(1.0, current_pop / total_animals)
+            hunt_prob = min(1.0, self._calculate_hunt_probability(ecosystem, 1.0))
             if random.random() < hunt_prob:
                 self.hunt(random.choice(prey_list))
+        else:
+            self.decay(4)
