@@ -1,11 +1,11 @@
 from zoo_simulator.animals import Herbivore, Carnivore, Omnivore
 
-def create_animal(species: str, name: str, energy_level: int):
-    animal_types = {
+def create_animal(diet: str, name: str, energy_level: int):
+    animal_diet = {
         "herbivore": Herbivore,
         "carnivore": Carnivore,
         "omnivore": Omnivore,
     }
 
-    species = species.lower()
-    return animal_types[species](species, name, energy_level)
+    diet = diet.lower()
+    return animal_diet[diet](name, energy_level)

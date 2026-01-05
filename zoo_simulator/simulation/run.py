@@ -10,29 +10,9 @@ def run_simulation(days=100, total_animals=20):
         alive_animals = [a for a in animals if a.alive]
         current_pop = len(alive_animals)
 
-        # Herbivores graze
+        # Each animal performs its daily action (polymorphism)
         for a in alive_animals:
-            if a.species == "herbivore":
-                a.graze()
-
-        # Omnivores graze + hunt
-        omnivores = [a for a in alive_animals if a.species == "omnivore"]
-        for omni in omnivores:
-            omni.graze()
-            prey_list = [p for p in alive_animals if p.is_alive() and p != omni]
-            if prey_list:
-                hunt_prob = 0.5 * (current_pop / total_animals)
-                if random.random() < hunt_prob:
-                    omni.hunt(random.choice(prey_list))
-
-        # Carnivores hunt
-        carnivores = [a for a in alive_animals if a.species == "carnivore"]
-        for carn in carnivores:
-            prey_list = [p for p in alive_animals if p.is_alive() and p.species != "carnivore"]
-            if prey_list:
-                hunt_prob = min(1.0, current_pop / total_animals)
-                if random.random() < hunt_prob:
-                    carn.hunt(random.choice(prey_list))
+            a.day_action(animals)
 
         # Stochastic deaths
         for a in alive_animals:
@@ -47,7 +27,7 @@ def run_simulation(days=100, total_animals=20):
 
         for a in alive_animals:
             if random.random() < birth_prob:
-                animals.append(type(a)(a.species, f"{a.name}_Jr", 100))
+                animals.append(type(a)(f"{a.name}_Jr", 100))
 
         # Stats
         alive_animals = [a for a in animals if a.alive]
