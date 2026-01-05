@@ -21,5 +21,3 @@ class Carnivore(Animal):
             hunt_prob = min(1.0, self._calculate_hunt_probability(ecosystem, 1.0))
             if random.random() < hunt_prob:
                 self.hunt(random.choice(prey_list))
-        else:
-            self.decay(4)
