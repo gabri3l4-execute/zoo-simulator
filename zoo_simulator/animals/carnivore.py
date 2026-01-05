@@ -1,17 +1,23 @@
 import random
 from zoo_simulator.animals.base import Animal
-from zoo_simulator.animals.herbivore import Herbivore
+
 
 class Carnivore(Animal):
     def __init__(self, name, energy=100):
         super().__init__(name, energy)
 
-    def can_be_hunted_by(self, predator):
-        """Carnivores cannot be hunted by other carnivores."""
-        return not isinstance(predator, Carnivore)
-
     def hunt(self, prey):
-        success_chance = 0.4 if isinstance(prey, Herbivore) else 0.25
+        """Carnivores hunt herbivores easily, omnivores with moderate difficulty."""
+        from zoo_simulator.animals.herbivore import Herbivore
+        from zoo_simulator.animals.omnivore import Omnivore
+
+        if isinstance(prey, Herbivore):
+            success_chance = 0.40
+        elif isinstance(prey, Omnivore):
+            success_chance = 0.25
+        else:
+            return  # carnivores do NOT hunt carnivores
+
         self._hunt(prey, success_chance, reward=20, fail_cost=4)
 
     def day_action(self, ecosystem):

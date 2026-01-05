@@ -4,7 +4,7 @@ import random
 class Animal:
     MIN_ENERGY = 0
     MAX_ENERGY = 100
-    
+
     def __init__(self, name, energy=100):
         self.name = name
         self._energy = None  # Initialize private attribute first
@@ -24,10 +24,6 @@ class Animal:
         if self._energy <= self.MIN_ENERGY and self.alive:
             self.die()
 
-    def can_be_hunted_by(self, predator):
-        """Determine if this animal can be hunted by the given predator."""
-        return True
-
     def day_action(self, ecosystem):
         """Perform this animal's daily action. Override in subclasses."""
         raise NotImplementedError
@@ -35,14 +31,12 @@ class Animal:
     def _iter_available_prey(self, ecosystem):
         """Yield animals that can be hunted by this predator."""
         for animal in ecosystem:
-            if animal.is_alive() and animal.can_be_hunted_by(self) and animal != self:
+            if animal.is_alive() and animal is not self:
                 yield animal
 
     def _hunt(self, prey, success_chance, reward, fail_cost):
         """Shared hunting helper to reduce duplication in subclasses."""
         if not self.is_alive() or not prey.is_alive():
-            return
-        if not prey.can_be_hunted_by(self):
             return
 
         if random.random() < success_chance:

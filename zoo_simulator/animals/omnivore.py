@@ -1,6 +1,5 @@
 import random
 from zoo_simulator.animals.base import Animal
-from zoo_simulator.animals.herbivore import Herbivore
 
 class Omnivore(Animal):
     def __init__(self, name, energy=100):
@@ -11,8 +10,19 @@ class Omnivore(Animal):
         self.decay(1)
 
     def hunt(self, prey):
-        success_chance = 0.25 if isinstance(prey, Herbivore) else 0.15
+        """Omnivores hunt herbivores easily, omnivores rarely, carnivores never."""
+        from zoo_simulator.animals.herbivore import Herbivore
+        from zoo_simulator.animals.omnivore import Omnivore
+
+        if isinstance(prey, Herbivore):
+            success_chance = 0.25
+        elif isinstance(prey, Omnivore):
+            success_chance = 0.10
+        else:
+            return  # omnivores do NOT hunt carnivores
+
         self._hunt(prey, success_chance, reward=15, fail_cost=3)
+
 
     def day_action(self, ecosystem):
         """Omnivores graze and hunt each day."""

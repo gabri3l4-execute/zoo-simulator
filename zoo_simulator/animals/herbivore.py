@@ -1,5 +1,6 @@
 from zoo_simulator.animals.base import Animal
 
+
 class Herbivore(Animal):
     def __init__(self, name, energy=100):
         super().__init__(name, energy)
