@@ -3,7 +3,7 @@ from zoo_simulator.animals.base import Animal
 
 
 class Omnivore(Animal):
-    SUCCESS_CHANCE_WHEN_HUNTING = 0.55
+    SUCCESS_CHANCE_WHEN_HUNTED = 0.55
 
     def __init__(self, name, energy=100):
         super().__init__(name, energy)

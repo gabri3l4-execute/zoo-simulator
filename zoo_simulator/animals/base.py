@@ -4,7 +4,7 @@ import random
 class Animal:
     MIN_ENERGY = 0
     MAX_ENERGY = 100
-    SUCCESS_CHANCE_WHEN_HUNTING = 0.5
+    SUCCESS_CHANCE_WHEN_HUNTED = 0.5
 
     def __init__(self, name, energy=100):
         self.name = name
@@ -35,7 +35,7 @@ class Animal:
         if not self.is_alive() or not prey.is_alive():
             return
 
-        if random.random() < prey.SUCCESS_CHANCE_WHEN_HUNTING:
+        if random.random() > prey.SUCCESS_CHANCE_WHEN_HUNTED:
             prey.die()
             self.eat(reward)
         else:
