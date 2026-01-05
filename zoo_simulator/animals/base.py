@@ -30,7 +30,7 @@ class Animal:
 
     def day_action(self, ecosystem):
         """Perform this animal's daily action. Override in subclasses."""
-        pass
+        raise NotImplementedError
 
     def _iter_available_prey(self, ecosystem):
         """Yield animals that can be hunted by this predator."""
