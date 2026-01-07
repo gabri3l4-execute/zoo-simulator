@@ -6,11 +6,16 @@ class Animal:
     MAX_ENERGY = 100
     SUCCESS_CHANCE_WHEN_HUNTED = 0.5
 
-    def __init__(self, name, energy=100):
+    def __init__(self, name, energy=100, hunger_threshold=0.6):
         self.name = name
         self._energy = None
         self.energy = energy
+        self.hunger_threshold = hunger_threshold
         self.alive = True
+
+    @property
+    def is_hungry(self):
+        return self.energy < self.hunger_threshold * self.MAX_ENERGY
 
     @property
     def energy(self):
@@ -43,6 +48,7 @@ class Animal:
 
     def _calculate_hunt_probability(self, ecosystem, multiplier=1.0):
         alive_animals = [a for a in ecosystem if a.is_alive()]
+        prey_animals = [p for p in alive_animals if p is not self]
         current_pop = len(alive_animals)
         total_animals = len(ecosystem)
         return multiplier * (current_pop / total_animals)

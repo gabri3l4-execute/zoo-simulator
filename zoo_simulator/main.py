@@ -21,11 +21,14 @@ def cli():
 
     args = parser.parse_args()
 
-    populations, energies = run_simulation(days=args.days, total_animals=100)
+    populations, energies, stats_by_diet = run_simulation(days=args.days, total_animals=100)
 
     if args.stats:
         print("Daily population:", populations[:args.days])
         print("Daily average energy:", [round(e, 2) for e in energies[:args.days]])
+        print("herbivore",stats_by_diet["herbivore"])
+        print("omnivore",stats_by_diet["omnivore"])
+        print("carnivore",stats_by_diet["carnivore"])
 
 def main():
     # Optional: keep this for direct python execution

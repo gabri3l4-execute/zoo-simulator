@@ -5,6 +5,12 @@ def run_simulation(days=100, total_animals=20):
     animals = generate_ecosystem(total=total_animals)
     daily_populations = []
     daily_energy = []
+    stats_by_diet = {
+        "herbivore": [],
+        "omnivore": [],
+        "carnivore": [],
+    }
+    
 
     for _ in range(days):
         alive_animals = [a for a in animals if a.alive]
@@ -35,4 +41,11 @@ def run_simulation(days=100, total_animals=20):
         avg_energy = sum(a.energy for a in alive_animals) / len(alive_animals) if alive_animals else 0
         daily_energy.append(avg_energy)
 
-    return daily_populations, daily_energy
+        by_diet_counts = {"herbivore": 0, "omnivore": 0, "carnivore": 0}
+        for a in alive_animals:
+            by_diet_counts[str(type(a).__name__).lower()] += 1
+
+        for s in stats_by_diet:
+            stats_by_diet[s].append(by_diet_counts[s])
+
+    return daily_populations, daily_energy, stats_by_diet
